@@ -31,7 +31,6 @@ func handle_slot_selection(slot_index: int) -> void:
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed('drop'):
 		hands.drop_item(ray)
-	pass
 	
 func inventory_append(item: Node3D):
 	item.set_script(item.get_meta('use'))

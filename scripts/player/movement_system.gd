@@ -11,6 +11,7 @@ var ground_strength := 1.0
 var air_strength := 0.2
 var strength := 1.0
 
+@onready var flashlight: SpotLight3D = $"../vision/hands/flashlight"
 @onready var player: CharacterBody3D = $".."
 @onready var collision: CollisionShape3D = $"../collision"
 @onready var capsule_shape := collision.shape
@@ -18,7 +19,7 @@ var strength := 1.0
 @onready var vision: Camera3D = $"../vision"
 
 @onready var current_speed = normal_speed
-@onready var world = get_tree().current_scene.get_node('nav_region/world')
+@onready var world = get_tree().current_scene.get_node('world_root/world')
 @export var sense = 0.2
 @export var normal_speed = 5.0
 @export var sprint_speed = 8.0
@@ -26,23 +27,9 @@ var strength := 1.0
 @export var jump_velocity = 4.5
 
 func _ready() -> void:
-
 	player.set_physics_process(true)
 
 #region movement_stuff 
-func can_stand_up() -> bool:
-	var space_state = player.get_world_3d().direct_space_state
-	var space_check = PhysicsRayQueryParameters3D.create(
-		player.global_transform.origin,
-		player.global_transform.origin + Vector3.UP * 1.0
-	)
-	space_check.collision_mask = 1  # по необходимости
-	var result = space_state.intersect_ray(space_check)
-	if not result:
-		return true
-	return result.empty()
-
-	
 func crouching(delta: float, target_speed: float, target_height: float, condition: bool):
 	current_height = lerp(current_height, target_height, delta * 10)
 	
@@ -82,6 +69,10 @@ func movement_states(delta: float):
 		player.velocity.x = move_toward(player.velocity.x, 0, current_speed)
 		player.velocity.z = move_toward(player.velocity.z, 0, current_speed)
 #region 
+
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("flashlight"):
+		flashlight.visible = !flashlight.visible
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:

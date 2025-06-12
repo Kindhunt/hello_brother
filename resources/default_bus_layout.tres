@@ -1,0 +1,47 @@
+[gd_resource type="AudioBusLayout" load_steps=5 format=3 uid="uid://v4ipww5qyeaa"]
+
+[sub_resource type="AudioEffectNotchFilter" id="AudioEffectNotchFilter_vi6xv"]
+resource_name = "NotchFilter"
+
+[sub_resource type="AudioEffectNotchFilter" id="AudioEffectNotchFilter_8empo"]
+resource_name = "NotchFilter"
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_lv8gh"]
+resource_name = "Reverb"
+room_size = 0.6
+spread = 0.8
+hipass = 0.1
+wet = 0.35
+
+[sub_resource type="AudioEffectChorus" id="AudioEffectChorus_erjfh"]
+resource_name = "Chorus"
+dry = 0.89
+wet = 0.24
+
+[resource]
+bus/1/name = &"Music"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = -14.0622
+bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectNotchFilter_vi6xv")
+bus/1/effect/0/enabled = true
+bus/2/name = &"FX"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = 0.0
+bus/2/send = &"Master"
+bus/3/name = &"Brother"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 0.0
+bus/3/send = &"FX"
+bus/3/effect/0/effect = SubResource("AudioEffectNotchFilter_8empo")
+bus/3/effect/0/enabled = true
+bus/3/effect/1/effect = SubResource("AudioEffectReverb_lv8gh")
+bus/3/effect/1/enabled = true
+bus/3/effect/2/effect = SubResource("AudioEffectChorus_erjfh")
+bus/3/effect/2/enabled = true

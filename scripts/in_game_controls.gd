@@ -6,9 +6,7 @@ extends Control
 func _ready() -> void:
 	visible = false
 	
-func _process(delta: float) -> void:
-	pass
-	
+
 func _on_continue_game_button_down() -> void:
 	get_tree().paused = false
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

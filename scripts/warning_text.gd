@@ -14,8 +14,8 @@ func setup_timer() -> void:
 	timer.timeout.connect(_on_timer_timeout)
 	add_child(timer)
 
-func show_text(text: String) -> void:
-	self.text = text
+func show_text(_text: String) -> void:
+	self.text = _text
 	show()
 	timer.start()
 

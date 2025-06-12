@@ -3,9 +3,11 @@ extends Node3D
 @onready var drop_obj: Node3D = $"../drop_obj"
 @onready var alligner: Node3D = $"../../alligner"
 
+const path_to_world := 'world_root/world'
+
 var current_item: Node3D = null
 
-func check_on_player(origin: Vector3, radius: float = 1.0) -> Variant:
+func check_on_player(origin: Vector3) -> Variant:
 	var space = get_world_3d().direct_space_state
 
 	var query = PhysicsShapeQueryParameters3D.new()
@@ -60,10 +62,13 @@ func drop_item(ray: RayCast3D) -> void:
 	
 	spawned_item.freeze = false
 	
+	var item_mesh_instance = spawned_item.get_node('mesh')
+	item_mesh_instance.cast_shadow = true
+	
 	spawned_item.set_script(current_item.get_meta('pickup'))
 	spawned_item.get_node('collision').disabled = false
 	
-	get_tree().current_scene.get_node('nav_region/world').add_child(spawned_item)
+	get_tree().current_scene.get_node(path_to_world).add_child(spawned_item)
 		
 	spawned_item.global_position = drop_pos
 	
@@ -89,6 +94,8 @@ func reset_item() -> void:
 func put_in_hands(item: Node3D) -> void:
 	current_item = item.duplicate()
 	
+	var item_mesh_instance = current_item.get_node('mesh') as MeshInstance3D
+	item_mesh_instance.cast_shadow = false	
 	item.queue_free()	
 	reset_item()
 
@@ -110,7 +117,7 @@ func swap(slot_index: int, slots: Array, gui_slots: Array) -> void:
 		slot_item_node = slots[slot_index].duplicate() 
 		slots[slot_index].queue_free()
 	
-	if get_child_count() > 1:
+	if get_child(get_child_count() - 1) is RigidBody3D:
 		remove_child(current_item)
 		
 	slots[slot_index] = current_item_node

@@ -27,11 +27,9 @@ func select_table_rows(table: String, condition: String, columns: Array):
 	db.close_db()
 	return rows
 	
-func _process(delta: float) -> void:
 	# on click save on slot # write save to slot
 	# on click delete on slot # delete slot
 	# on click write on slot # rewrite data to actual one
 	
 	# also, i need use sqlite database as data storage for game language locales, 
 	# english and russian
-	pass
