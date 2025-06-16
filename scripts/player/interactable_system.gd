@@ -8,12 +8,19 @@ extends Node
 func _ready() -> void:
 	interact_text.hide()
 
+@warning_ignore("unused_variable")
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("use"):
 		var usable = hands.get_child(hands.get_child_count() - 1)
 		if usable.has_method("use") and not usable.get_meta('is_pair'):
 			usable.use()
+		elif usable.has_method("use") and usable.get_meta('is_pair'):
+			if ray_cast_3d.is_colliding():
+				var target = ray_cast_3d.get_collider()
+				if target != null:
+					usable.use(target)
 
+@warning_ignore("unused_variable")
 func _physics_process(delta: float) -> void:
 	if interact_text.visible:
 		interact_text.hide()
@@ -21,7 +28,7 @@ func _physics_process(delta: float) -> void:
 	if ray_cast_3d.is_colliding():
 		var target = ray_cast_3d.get_collider()
 		if target != null && target.get_meta_list().size() > 0:
-			if target.has_method("interact") and not target.is_busy:
+			if target.has_method("interact"):
 				interact_text.show()
 				if Input.is_action_just_pressed('interact'):
 					target.interact(player)

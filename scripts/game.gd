@@ -1,15 +1,17 @@
 extends Node
 
 signal visible_changed
+signal settings_changed(sense, invert_x, invert_y)
 
-#create signal for auto_save
+var sense: int
+var invert_x: bool
+var invert_y: bool
+var is_input: bool
 
 @onready var in_game_controls: Control = $CanvasLayer/in_game_controls
-@onready var database: Node = $database
 @onready var interaction_gui_layer: CanvasLayer = $world_root/player/CanvasLayer
 
 const DEFAULT_BUS_LAYOUT = preload("res://resources/default_bus_layout.tres")
-
 
 func _ready() -> void:
 	AudioServer.set_bus_layout(DEFAULT_BUS_LAYOUT)
@@ -31,3 +33,14 @@ func _process(delta: float) -> void:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			visible_changed.emit()
 	
+func update_invert_x(toggled_on: bool):
+	invert_x = toggled_on
+	emit_signal('settings_changed',sense,invert_x,invert_y)
+
+func update_invert_y(toggled_on: bool):
+	invert_y = toggled_on
+	emit_signal('settings_changed',sense,invert_x,invert_y)
+
+func update_sense(value: float):
+	sense = value
+	emit_signal('settings_changed',sense,invert_x,invert_y)

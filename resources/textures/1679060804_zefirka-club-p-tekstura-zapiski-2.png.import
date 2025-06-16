@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsa7dohhxopf8"
-path.s3tc="res://.godot/imported/4a691c687a57a40a53e0c2c82f272db81195cd2e-4035039575.jpg-8b53354efac71f6ce1bab9cb58ba9eb3.s3tc.ctex"
+uid="uid://c86gnj0fthysc"
+path.s3tc="res://.godot/imported/1679060804_zefirka-club-p-tekstura-zapiski-2.png-38c2ddd0d6402e3989ebf591269060da.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://resources/4a691c687a57a40a53e0c2c82f272db81195cd2e-4035039575.jpg"
-dest_files=["res://.godot/imported/4a691c687a57a40a53e0c2c82f272db81195cd2e-4035039575.jpg-8b53354efac71f6ce1bab9cb58ba9eb3.s3tc.ctex"]
+source_file="res://resources/textures/1679060804_zefirka-club-p-tekstura-zapiski-2.png"
+dest_files=["res://.godot/imported/1679060804_zefirka-club-p-tekstura-zapiski-2.png-38c2ddd0d6402e3989ebf591269060da.s3tc.ctex"]
 
 [params]
 

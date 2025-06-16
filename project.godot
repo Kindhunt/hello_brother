@@ -17,7 +17,13 @@ config/icon="res://icon.svg"
 
 [audio]
 
-buses/default_bus_layout=""
+buses/default_bus_layout="res://resources/default_bus_layout.tres"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=3
 
 [editor]
 
@@ -43,6 +49,10 @@ folder_colors={
 [global_group]
 
 brother=""
+lights=""
+root=""
+win=""
+plank=""
 
 [input]
 
@@ -152,5 +162,6 @@ flashlight={
 
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality=4
 lights_and_shadows/positional_shadow/soft_shadow_filter_quality=4
+2d/shadow_atlas/size=512
 camera/depth_of_field/depth_of_field_bokeh_shape=2
 camera/depth_of_field/depth_of_field_bokeh_quality=3

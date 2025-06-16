@@ -63,7 +63,8 @@ func drop_item(ray: RayCast3D) -> void:
 	spawned_item.freeze = false
 	
 	var item_mesh_instance = spawned_item.get_node('mesh')
-	item_mesh_instance.cast_shadow = true
+	if item_mesh_instance:
+		item_mesh_instance.cast_shadow = true
 	
 	spawned_item.set_script(current_item.get_meta('pickup'))
 	spawned_item.get_node('collision').disabled = false
@@ -95,7 +96,9 @@ func put_in_hands(item: Node3D) -> void:
 	current_item = item.duplicate()
 	
 	var item_mesh_instance = current_item.get_node('mesh') as MeshInstance3D
-	item_mesh_instance.cast_shadow = false	
+	if item_mesh_instance:
+		item_mesh_instance.cast_shadow = false
+	
 	item.queue_free()	
 	reset_item()
 
